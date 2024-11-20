@@ -1,5 +1,9 @@
 <?php
-// form fields section
+/**
+ * Controls to design the sub labels of fields in customizer.
+ */
+
+// form fields section.
 $wp_customize->add_section(
 	'sfwf_form_id_field_sub_labels',
 	array(

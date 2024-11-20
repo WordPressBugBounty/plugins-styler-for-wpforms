@@ -1,4 +1,8 @@
 <?php
+/**
+ * Controls under General settings in customizer.
+ */
+
 $wp_customize->add_section(
 	'sfwf_form_id_general_settings',
 	array(
@@ -29,8 +33,8 @@ $wp_customize->add_control(
 $wp_customize->add_setting(
 	'sfwf_general_settings' . $current_form_id . '[force-style]',
 	array(
-		'default'   => false,
-		'type'      => 'option',
+		'default' => false,
+		'type'    => 'option',
 	)
 );
 
@@ -55,6 +59,7 @@ $wp_customize->add_setting(
 
 // get all WPForms forms created by user.
 if ( class_exists( 'WPForms_Form_Handler' ) ) {
+
 	$wpforms_hander = wpforms()->form;
 	$forms          = $wpforms_hander->get();
 	$select_form    = array( -1 => '---Select form --' );

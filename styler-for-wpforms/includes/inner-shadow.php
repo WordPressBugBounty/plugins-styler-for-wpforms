@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * For Shoadow but not in use.
+ */
 $wp_customize->add_section(
 	'sfwf_form_id_form_inner_shadow',
 	array(

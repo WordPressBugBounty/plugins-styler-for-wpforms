@@ -1,4 +1,7 @@
 <?php
+/**
+ * Checkbox controls in customizer.
+ */
 
 $wp_customize->add_section(
 	'sfwf_form_id_checkbox_inputs',
@@ -36,7 +39,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -62,7 +65,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -88,7 +91,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -149,7 +152,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -174,7 +177,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -201,7 +204,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -242,7 +245,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -267,7 +270,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -294,7 +297,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -325,24 +328,16 @@ $wp_customize->add_control(
 );
 
 
-$wp_customize->add_setting(
-	'sfwf_form_id_' . $current_form_id . '[checkbox-inputs][padding]',
-	array(
-		'default'   => '',
-		'transport' => 'postMessage',
-		'type'      => 'option',
+$wp_customize->add_control(
+	new WP_Customize_Label_Only(
+		$wp_customize, // WP_Customize_Manager.
+		'sfwf_form_id_' . $current_form_id . '[checkbox-inputs][padding-label-only]', // Setting id.
+		array( // Args, including any custom ones.
+			'label'    => __( 'Padding' ),
+			'section'  => 'sfwf_form_id_checkbox_inputs',
+			'settings' => array(),
+		)
 	)
 );
 
-$wp_customize->add_control(
-	'sfwf_form_id_' . $current_form_id . '[checkbox-inputs][padding]',
-	array(
-		'type'        => 'text',
-		'priority'    => 10, // Within the section.
-		'section'     => 'sfwf_form_id_checkbox_inputs', // Required, core or custom.
-		'label'       => __( 'Padding' ),
-		'input_attrs' => array(
-			'placeholder' => 'Example: 5px 10px 5px 10px',
-		),
-	)
-);
+sfwf_margin_padding_controls( $wp_customize, $current_form_id, 'sfwf_form_id_checkbox_inputs', 'checkbox-inputs', 'padding' );

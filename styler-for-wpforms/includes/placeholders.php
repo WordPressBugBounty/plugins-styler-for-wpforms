@@ -1,5 +1,9 @@
 <?php
-// form placeholders section uses refresh method
+/**
+ * Controls to design the placeholders but not in use.
+ */
+
+// form placeholders section uses refresh method.
 $wp_customize->add_section(
 	'sfwf_form_id_placeholders',
 	array(

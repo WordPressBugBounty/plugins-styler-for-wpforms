@@ -1,5 +1,9 @@
 <?php
-// form  section
+/**
+ * Controls to design the section break title but not in use.
+ */
+
+// form  section.
 $wp_customize->add_section(
 	'sfwf_form_id_section_break_title_description',
 	array(

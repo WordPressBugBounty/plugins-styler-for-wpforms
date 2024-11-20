@@ -1,5 +1,9 @@
 <?php
-// form fields section
+/**
+ * Controls for list fields but not in use.
+ */
+
+// form fields section.
 $wp_customize->add_section(
 	'sfwf_form_id_list_field',
 	array(
@@ -237,4 +241,3 @@ $wp_customize->add_control(
 		),
 	)
 );
-

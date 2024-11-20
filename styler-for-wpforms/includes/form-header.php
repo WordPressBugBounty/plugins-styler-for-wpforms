@@ -1,4 +1,7 @@
 <?php
+/**
+ * Controls to desgin the form header in customizer.
+ */
 
 $wp_customize->add_section(
 	'sfwf_form_id_form_header',
@@ -123,46 +126,33 @@ $wp_customize->add_control(
 	)
 );
 
-$wp_customize->add_setting(
-	'sfwf_form_id_' . $current_form_id . '[form-header][margin]',
-	array(
-		'default'   => '',
-		'transport' => 'postMessage',
-		'type'      => 'option',
+// Start of Section
+// Label.
+$wp_customize->add_control(
+	new WP_Customize_Label_Only(
+		$wp_customize, // WP_Customize_Manager.
+		'sfwf_form_id_' . $current_form_id . '[form-header][margin-label-only]', // Setting id.
+		array( // Args, including any custom ones.
+			'label'    => __( 'Margin' ),
+			'section'  => 'sfwf_form_id_form_header',
+			'settings' => array(),
+		)
 	)
 );
+
+sfwf_margin_padding_controls( $wp_customize, $current_form_id, 'sfwf_form_id_form_header', 'form-header', 'margin' );
+
 
 $wp_customize->add_control(
-	'sfwf_form_id_' . $current_form_id . '[form-header][margin]',
-	array(
-		'type'        => 'text',
-		'priority'    => 10, // Within the section.
-		'section'     => 'sfwf_form_id_form_header', // Required, core or custom.
-		'label'       => __( 'Margin' ),
-		'input_attrs' => array(
-			'placeholder' => 'Example: 5px 10px 5px 10px',
-		),
+	new WP_Customize_Label_Only(
+		$wp_customize, // WP_Customize_Manager.
+		'sfwf_form_id_' . $current_form_id . '[form-header][padding-label-only]', // Setting id.
+		array( // Args, including any custom ones.
+			'label'    => __( 'Padding' ),
+			'section'  => 'sfwf_form_id_form_header',
+			'settings' => array(),
+		)
 	)
 );
 
-$wp_customize->add_setting(
-	'sfwf_form_id_' . $current_form_id . '[form-header][padding]',
-	array(
-		'default'   => '',
-		'transport' => 'postMessage',
-		'type'      => 'option',
-	)
-);
-
-$wp_customize->add_control(
-	'sfwf_form_id_' . $current_form_id . '[form-header][padding]',
-	array(
-		'type'        => 'text',
-		'priority'    => 10, // Within the section.
-		'section'     => 'sfwf_form_id_form_header', // Required, core or custom.
-		'label'       => __( 'Padding' ),
-		'input_attrs' => array(
-			'placeholder' => 'Example: 5px 10px 5px 10px',
-		),
-	)
-);
+sfwf_margin_padding_controls( $wp_customize, $current_form_id, 'sfwf_form_id_form_header', 'form-header', 'padding' );

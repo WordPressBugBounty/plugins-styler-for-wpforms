@@ -1,4 +1,7 @@
 <?php
+/**
+ * Controls for outer shadow but not in use.
+ */
 
 $wp_customize->add_section(
 	'sfwf_form_id_form_outer_shadow',

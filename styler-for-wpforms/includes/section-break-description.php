@@ -1,5 +1,9 @@
 <?php
-// form  section
+/**
+ * Controls to design the Section break fields but not in use.
+ */
+
+// form  section.
 $wp_customize->add_setting(
 	'sfwf_form_id_' . $current_form_id . '[section-break-description][text-align]',
 	array(

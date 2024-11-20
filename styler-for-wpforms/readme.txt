@@ -1,18 +1,18 @@
-=== Styler for WPForms ===
+=== Utimate Addons ( Styler ) for WPForms ===
 Contributors: wpmonks
 Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
-Tested up to: 6.6
-Stable tag: 2.0.6
+Tested up to: 6.7
+Stable tag: 3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Styler for WPForms makes the task of designing WPForms an easy one.
+Ultimate Addons for WPForms makes the task of designing WPForms an easy one.
 
 == Description ==
 
-**Styler for WPForms lets you create beautiful designs for WPForms.** It uses WordPress Customizer so you get a true WYSIWYG experience. All the changes you make in this plugin are instantaneously visible so you can see how the form looks in realtime.
+**Ultimate Addons for WPForms lets you create beautiful designs for WPForms.** It uses WordPress Customizer so you get a true WYSIWYG experience. All the changes you make in this plugin are instantaneously visible so you can see how the form looks in realtime.
 
 **Here is step by step guide to style your forms**
 
@@ -70,6 +70,17 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.2 (20/11/2024) =
+* Minor bugfix
+
+= 3.1 (20/11/2024) =
+* Fixed margin and paddings controls not showing values
+
+= 3.0 (20/11/2024) =
+* Added new interface for styling WPForms
+* Added direct link for styling forms
+* Bugfixes and enhancements
+
 = 2.0.6 (16/07/2024) =
 * Fixed minor bug
 

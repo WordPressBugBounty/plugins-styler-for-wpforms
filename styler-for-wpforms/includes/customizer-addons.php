@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Prints the Views for WPForms Addon under addons tag in customizer.
+ */
 class Sfwf_Views_Custom_Control extends WP_Customize_Control {
 
 	/**
@@ -11,7 +14,7 @@ class Sfwf_Views_Custom_Control extends WP_Customize_Control {
 
 		<label>
 			<h2><?php echo esc_html( $this->label ); ?></h2>
-			<a href="https://formviewswp.com/pricing/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo SFWF_URL; ?>/css/images/addons/views.png"></a>
+			<a href="https://formviewswp.com/pricing/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo esc_url( SFWF_URL ); ?>/css/images/addons/views.png"></a>
 			<h3>Display WPForms Entries on your site frontend!</h3>
 			<hr>
 		</textarea>
@@ -20,6 +23,9 @@ class Sfwf_Views_Custom_Control extends WP_Customize_Control {
 	}
 }
 
+/**
+ * Prints the Bootstrap Addon under addons tag in customizer.
+ */
 class Sfwf_Bootstrap_Custom_Control extends WP_Customize_Control {
 
 	/**
@@ -31,7 +37,7 @@ class Sfwf_Bootstrap_Custom_Control extends WP_Customize_Control {
 
 		<label>
 			<h2><?php echo esc_html( $this->label ); ?></h2>
-			<a href="https://wpmonks.com/downloads/bootstrap-for-wpforms/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo SFWF_URL; ?>/css/images/addons/bootstrap.png"></a>
+			<a href="https://wpmonks.com/downloads/bootstrap-for-wpforms/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo esc_url( SFWF_URL ); ?>/css/images/addons/bootstrap.png"></a>
 			<h3>Add Bootstrap styles into your form</h3>
 			<hr>
 		</textarea>
@@ -40,7 +46,9 @@ class Sfwf_Bootstrap_Custom_Control extends WP_Customize_Control {
 	}
 }
 
-
+/**
+ * Prints the Field Icons Addon under addons tag in customizer.
+ */
 class Sfwf_Field_Icons_Custom_Control extends WP_Customize_Control {
 
 	/**
@@ -51,7 +59,7 @@ class Sfwf_Field_Icons_Custom_Control extends WP_Customize_Control {
 		?>
 		<label>
 			<h2><?php echo esc_html( $this->label ); ?></h2>
-			<a href="https://wpmonks.com/downloads/field-icons-for-wpforms/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo SFWF_URL; ?>/css/images/addons/field-icons.png"></a>
+			<a href="https://wpmonks.com/downloads/field-icons-for-wpforms/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo esc_url( SFWF_URL ); ?>/css/images/addons/field-icons.png"></a>
 			<h3>Add icons inside form fields</h3>
 			<hr>
 		</textarea>
@@ -60,7 +68,9 @@ class Sfwf_Field_Icons_Custom_Control extends WP_Customize_Control {
 	}
 }
 
-
+/**
+ * Prints the More Addon under addons tag in customizer.
+ */
 class Sfwf_More_Addons_Custom_Control extends WP_Customize_Control {
 
 	/**
@@ -71,7 +81,7 @@ class Sfwf_More_Addons_Custom_Control extends WP_Customize_Control {
 		?>
 		<label>
 			<h2><?php echo esc_html( $this->label ); ?></h2>
-			<a href="https://wpmonks.com/downloads/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo SFWF_URL; ?>/css/images/addons/more-addons.png"></a>
+			<a href="https://wpmonks.com/downloads/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo esc_url( SFWF_URL ); ?>/css/images/addons/more-addons.png"></a>
 			<h3>Checkout more addons</h3>
 			<hr>
 		</textarea>
@@ -80,6 +90,9 @@ class Sfwf_More_Addons_Custom_Control extends WP_Customize_Control {
 	}
 }
 
+/**
+ * Prints the Tooltips Addon under addons tag in customizer.
+ */
 class Sfwf_Tooltips_Custom_Control extends WP_Customize_Control {
 
 	/**
@@ -90,7 +103,7 @@ class Sfwf_Tooltips_Custom_Control extends WP_Customize_Control {
 		?>
 		<label>
 			<h2><?php echo esc_html( $this->label ); ?></h2>
-			<a href="https://wpmonks.com/downloads/tooltips-for-wpforms/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo SFWF_URL; ?>/css/images/addons/tooltips.png"></a>
+			<a href="https://wpmonks.com/downloads/tooltips-for-wpforms/?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo esc_url( SFWF_URL ); ?>/css/images/addons/tooltips.png"></a>
 			<h3>Show tooltips inside Gravity Form fields</h3>
 			<hr>
 		</textarea>
@@ -99,6 +112,9 @@ class Sfwf_Tooltips_Custom_Control extends WP_Customize_Control {
 	}
 }
 
+/**
+ * Prints the Custom Support under addons tag in customizer.
+ */
 class Sfwf_Customization_Support_Custom_Control extends WP_Customize_Control {
 
 	/**
@@ -109,7 +125,7 @@ class Sfwf_Customization_Support_Custom_Control extends WP_Customize_Control {
 		?>
 		<label>
 			<h2><?php echo esc_html( $this->label ); ?></h2>
-			<a href="https://wpmonks.com/contact-us?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo SFWF_URL; ?>/css/images/addons/support.png"></a>
+			<a href="https://wpmonks.com/contact-us?utm_source=dashboard&utm_medium=customizer&utm_campaign=wpforms-styler-plugin" target="_blank"><img src="<?php echo esc_url( SFWF_URL ); ?>/css/images/addons/support.png"></a>
 			<h3>Contact us for custom Gravity Forms work or for any support questions</h3>
 			<hr>
 		</textarea>

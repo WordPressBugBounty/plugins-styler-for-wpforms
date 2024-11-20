@@ -1,10 +1,14 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+/**
+ * Show options to dashboard users for adding the review on plugin.
+ */
+class Sfwf_Review {
 
-class Sfwf_Review{
-
+	/**
+	 * Work when initializing the class.
+	 *
+	 * @return void
+	 */
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'hooks' ) );
 		add_action( 'wp_ajax_sfwf_review_action', array( __CLASS__, 'ajax_handler' ) );
@@ -29,31 +33,34 @@ class Sfwf_Review{
 	 * @return false|string
 	 */
 	public static function installed_on() {
-		//delete_optionalled_on', $installed_on );( 'sfwf_reviews_inst
 		$installed_on = get_option( 'sfwf_reviews_installed_on', false );
-		// update_option( 'sfwf_reviews_installed_on', date('Y-m-d', strtotime('-90 days')) );
 		if ( ! $installed_on ) {
 			$installed_on = current_time( 'mysql' );
 			update_option( 'sfwf_reviews_installed_on', $installed_on );
 		}
-		//var_dump(get_option( 'sfwf_reviews_installed_on', false ));
 		return $installed_on;
 	}
 
 	/**
-	 *
+	 * Ajax call handler.
 	 */
 	public static function ajax_handler() {
-		$args = wp_parse_args( $_REQUEST, array(
-			'group'  => self::get_trigger_group(),
-			'code'   => self::get_trigger_code(),
-			'pri'    => self::get_current_trigger( 'pri' ),
-			'reason' => 'maybe_later',
-		) );
 
-		if ( ! wp_verify_nonce( $_REQUEST['nonce'], 'sfwf_review_action' ) ) {
+		$nonce = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
+
+		if ( ! isset( $nonce ) || ! wp_verify_nonce( $nonce, 'sfwf_review_action' ) ) {
 			wp_send_json_error();
 		}
+
+		$args = wp_parse_args(
+			$_REQUEST,
+			array(
+				'group'  => self::get_trigger_group(),
+				'code'   => self::get_trigger_code(),
+				'pri'    => self::get_current_trigger( 'pri' ),
+				'reason' => 'maybe_later',
+			)
+		);
 
 		try {
 			$user_id = get_current_user_id();
@@ -80,7 +87,8 @@ class Sfwf_Review{
 		}
 	}
 
-	/**
+	/** Get Which Group to trigger.
+	 *
 	 * @return int|string
 	 */
 	public static function get_trigger_group() {
@@ -94,7 +102,7 @@ class Sfwf_Review{
 
 			foreach ( $triggers as $g => $group ) {
 				foreach ( $group['triggers'] as $t => $trigger ) {
-					if ( ! in_array( false, $trigger['conditions'] ) && ( empty( $dismissed_triggers[ $g ] ) || $dismissed_triggers[ $g ] < $trigger['pri'] ) ) {
+					if ( ! in_array( false, $trigger['conditions'], true ) && ( empty( $dismissed_triggers[ $g ] ) || $dismissed_triggers[ $g ] < $trigger['pri'] ) ) {
 						$selected = $g;
 						break;
 					}
@@ -109,7 +117,8 @@ class Sfwf_Review{
 		return $selected;
 	}
 
-	/**
+	/** Get Which code to trigger in Group.
+	 *
 	 * @return int|string
 	 */
 	public static function get_trigger_code() {
@@ -118,10 +127,9 @@ class Sfwf_Review{
 		if ( ! isset( $selected ) ) {
 
 			$dismissed_triggers = self::dismissed_triggers();
-			//echo '<pre>';print_r($dismissed_triggers);die;
 			foreach ( self::triggers() as $g => $group ) {
 				foreach ( $group['triggers'] as $t => $trigger ) {
-					if ( ! in_array( false, $trigger['conditions'] ) && ( empty( $dismissed_triggers[ $g ] ) || $dismissed_triggers[ $g ] < $trigger['pri'] ) ) {
+					if ( ! in_array( false, $trigger['conditions'], true ) && ( empty( $dismissed_triggers[ $g ] ) || $dismissed_triggers[ $g ] < $trigger['pri'] ) ) {
 						$selected = $t;
 						break;
 					}
@@ -132,12 +140,12 @@ class Sfwf_Review{
 				}
 			}
 		}
-		//echo '<pre>';print_r( self::triggers());die;
 		return $selected;
 	}
-/**
-	 * @param null $key
+
+	/** Get the current trigger.
 	 *
+	 * @param string $key the status to look inside trigger.
 	 * @return bool|mixed|void
 	 */
 	public static function get_current_trigger( $key = null ) {
@@ -185,9 +193,6 @@ class Sfwf_Review{
 	 */
 	public static function already_did( $set = false ) {
 		$user_id = get_current_user_id();
-		// var_dump(delete_user_meta( $user_id, '_sfwf_reviews_dismissed_triggers' ));
-		// delete_user_meta( $user_id, '_sfwf_reviews_last_dismissed' );
-		// delete_user_meta( $user_id, '_sfwf_reviews_already_did' );
 		if ( $set ) {
 			update_user_meta( $user_id, '_sfwf_reviews_already_did', true );
 
@@ -199,8 +204,8 @@ class Sfwf_Review{
 	/**
 	 * Gets a list of triggers.
 	 *
-	 * @param null $group
-	 * @param null $code
+	 * @param string $group which group to pick from triggers.
+	 * @param string $code which code to pick from group.
 	 *
 	 * @return bool|mixed|void
 	 */
@@ -209,13 +214,14 @@ class Sfwf_Review{
 
 		if ( ! isset( $triggers ) ) {
 			$current_user = wp_get_current_user();
-			$time_message = __( '<p>Hi %s! </p>
-			<p>You\'ve been using Styler for WPForms on your site for %s </p><p> We hope it\'s been helpful. If you\'re enjoying this plugin, please consider leaving a positive review on Wordpress plugin repository. It really helps.</p>', 'sfwf' );
+			$time_message = '<p>Hi %1$s! </p>
+            <p>You\'ve been using Styler for WPForms on your site for %2$s </p><p> We hope it\'s been helpful. If you\'re enjoying this plugin, please consider leaving a positive review on WordPress plugin repository. It really helps.</p>';
+
 			$triggers = array(
 				'time_installed' => array(
 					'triggers' => array(
 						'one_week'     => array(
-							'message'    => sprintf( $time_message, $current_user->user_login,  __( '1 week', 'sfwf' ) ),
+							'message'    => sprintf( $time_message, $current_user->user_login, __( '1 week', 'sfwf' ) ),
 							'conditions' => array(
 								strtotime( self::installed_on() . ' +1 week' ) < time(),
 							),
@@ -245,10 +251,9 @@ class Sfwf_Review{
 
 			);
 
-
 			$triggers = apply_filters( 'sfwf_reviews_triggers', $triggers );
 
-			// Sort Groups
+			// Sort Groups.
 			uasort( $triggers, array( __CLASS__, 'rsort_by_priority' ) );
 
 			// Sort each groups triggers.
@@ -260,14 +265,11 @@ class Sfwf_Review{
 		if ( isset( $group ) ) {
 			if ( ! isset( $triggers[ $group ] ) ) {
 				return false;
-			}
-			else if( ! isset( $code ) ) {
+			} elseif ( ! isset( $code ) ) {
 				return $triggers[ $group ];
-			}
-			else if( isset( $triggers[ $group ]['triggers'][ $code ] ) ) {
+			} elseif ( isset( $triggers[ $group ]['triggers'][ $code ] ) ) {
 				return $triggers[ $group ]['triggers'][ $code ];
-			}
-			else{
+			} else {
 				return false;
 			}
 		}
@@ -283,14 +285,13 @@ class Sfwf_Review{
 			return;
 		}
 
-		$group  = self::get_trigger_group();
-		$code   = self::get_trigger_code();
-		$pri    = self::get_current_trigger( 'pri' );
+		$group   = self::get_trigger_group();
+		$code    = self::get_trigger_code();
+		$pri     = self::get_current_trigger( 'pri' );
 		$trigger = self::get_current_trigger();
 
 		// Used to anonymously distinguish unique site+user combinations in terms of effectiveness of each trigger.
 		$uuid = wp_hash( home_url() . '-' . get_current_user_id() );
-		//var_dump($group, $code,$pri, $trigger ); die;
 		?>
 
 		<script type="text/javascript">
@@ -308,7 +309,7 @@ class Sfwf_Review{
 						url: ajaxurl,
 						data: {
 							action: 'sfwf_review_action',
-							nonce: '<?php echo wp_create_nonce( 'sfwf_review_action' ); ?>',
+							nonce: '<?php echo esc_html( wp_create_nonce( 'sfwf_review_action' ) ); ?>',
 							group: trigger.group,
 							code: trigger.code,
 							pri: trigger.pri,
@@ -320,12 +321,12 @@ class Sfwf_Review{
 					$.ajax({
 						method: "POST",
 						dataType: "json",
-						url: '<?php echo self::$api_url; ?>',
+						url: '<?php echo esc_url( self::$api_url ); ?>',
 						data: {
 							trigger_group: trigger.group,
 							trigger_code: trigger.code,
 							reason: reason,
-							uuid: '<?php echo $uuid; ?>'
+							uuid: '<?php echo esc_url( $uuid ); ?>'
 						}
 					});
 					<?php endif; ?>
@@ -373,11 +374,11 @@ class Sfwf_Review{
 			}
 			.sfwf-notice ul{
 				margin-top: 9px;
-   				 margin-bottom: 20px;
+					margin-bottom: 20px;
 			}
 			.sfwf-notice ul li{
 				float: left;
-   				 margin-right: 20px;
+					margin-right: 20px;
 			}
 
 		</style>
@@ -385,7 +386,7 @@ class Sfwf_Review{
 		<div class="notice notice-success is-dismissible sfwf-notice">
 
 			<p>
-				<img class="logo" src="<?php echo SFWF_URL ?>/css/images/icon.png" />
+				<img class="logo" src="<?php echo esc_url( SFWF_URL ); ?>/css/images/icon.png" />
 				<strong>
 					<?php echo $trigger['message']; ?>
 					-WpMonks
@@ -393,18 +394,18 @@ class Sfwf_Review{
 			</p>
 			<ul>
 				<li>
-					<a class="sfwf-dismiss" target="_blank" href="<?php echo $trigger['link']; ?>" data-reason="am_now">
-						<strong><?php _e( 'Ok, you deserve it', 'sfwf' ); ?></strong>
+					<a class="sfwf-dismiss" target="_blank" href="<?php echo esc_url( $trigger['link'] ); ?>" data-reason="am_now">
+						<strong><?php esc_html_e( 'Ok, you deserve it', 'sfwf' ); ?></strong>
 					</a>
 				</li>
 				<li>
 					<a href="#" class="sfwf-dismiss" data-reason="maybe_later">
-						<?php _e( 'Nope, maybe later', 'sfwf' ); ?>
+						<?php esc_html_e( 'Nope, maybe later', 'sfwf' ); ?>
 					</a>
 				</li>
 				<li>
 					<a href="#" class="sfwf-dismiss" data-reason="already_did">
-						<?php _e( 'I already did', 'sfwf' ); ?>
+						<?php esc_html_e( 'I already did', 'sfwf' ); ?>
 					</a>
 				</li>
 			</ul>
@@ -428,7 +429,7 @@ class Sfwf_Review{
 			empty( $trigger_code ),
 		);
 
-		return in_array( true, $conditions );
+		return in_array( true, $conditions, true );
 	}
 
 	/**
@@ -443,11 +444,10 @@ class Sfwf_Review{
 	}
 
 	/**
-	 * Sort array by priority value
+	 * Sort array by priority value.
 	 *
-	 * @param $a
-	 * @param $b
-	 *
+	 * @param array $a sorting value to compare.
+	 * @param array $b sorting value to compare.
 	 * @return int
 	 */
 	public static function sort_by_priority( $a, $b ) {
@@ -461,9 +461,8 @@ class Sfwf_Review{
 	/**
 	 * Sort array in reverse by priority value
 	 *
-	 * @param $a
-	 * @param $b
-	 *
+	 * @param array $a sorting value to compare.
+	 * @param array $b sorting value to compare.
 	 * @return int
 	 */
 	public static function rsort_by_priority( $a, $b ) {
@@ -473,7 +472,9 @@ class Sfwf_Review{
 
 		return ( $a['pri'] < $b['pri'] ) ? 1 : - 1;
 	}
-
 }
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 Sfwf_Review::init();

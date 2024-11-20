@@ -1,4 +1,8 @@
 <?php
+/**
+ * Control to select the form in customizer.
+ */
+
 $wp_customize->add_section(
 	'sfwf_select_form_section',
 	array(

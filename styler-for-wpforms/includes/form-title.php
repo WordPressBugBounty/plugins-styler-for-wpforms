@@ -1,4 +1,7 @@
 <?php
+/**
+ * Controls to design the form title in customizer.
+ */
 
 $wp_customize->add_section(
 	'sfwf_form_id_form_title_description',
@@ -81,7 +84,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_form_title_description', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -106,7 +109,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_form_title_description', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -133,7 +136,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_form_title_description', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -156,7 +159,7 @@ $wp_customize->add_control(
 		)
 	)
 );
-/* for pc*/
+/* for pc */
 $wp_customize->add_setting(
 	'sfwf_form_id_' . $current_form_id . '[form-title][line-height]',
 	array(
@@ -174,14 +177,14 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_form_title_description', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
 		)
 	)
 );
-/* for_tablet*/
+/* for_tablet */
 $wp_customize->add_setting(
 	'sfwf_form_id_' . $current_form_id . '[form-title][line-height-tab]',
 	array(
@@ -199,7 +202,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_form_title_description', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -208,7 +211,7 @@ $wp_customize->add_control(
 );
 
 
-/* for mobile*/
+/* for mobile */
 $wp_customize->add_setting(
 	'sfwf_form_id_' . $current_form_id . '[form-title][line-height-phone]',
 	array(
@@ -226,7 +229,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_form_title_description', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),

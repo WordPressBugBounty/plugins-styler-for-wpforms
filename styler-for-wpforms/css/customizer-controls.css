@@ -1,8 +1,3 @@
-
-
-
-
-
 li[id$=-max-width-label-only]+li[id$=-max-width],
 li[id$=-max-width-tab],
 li[id$=-max-width-phone],
@@ -14,7 +9,7 @@ li[id$=-height-tab],
 li[id$=-height-phone],
 li[id$=-border-label-only]+li[id$=-border-size],
 li[id$=-border-label-only]+li[id$=-border-size]+li[id$=-border-type],
-li[id$=-border-label-only]+li[id$=-border-size]+li[id$=-border-type]+li[id$=-border-radius]{
+li[id$=-border-label-only]+li[id$=-border-size]+li[id$=-border-type]+li[id$=-border-radius] {
   max-width: 31%;
   display: inline-block !important;
   clear: none;
@@ -129,6 +124,7 @@ li[id$=-padding-label-only]+li[id$=-padding-top],
 li[id$=-padding-label-only]+li[id$=-padding-top]+li[id$=-padding-bottom],
 li[id$=-padding-label-only]+li[id$=-padding-top]+li[id$=-padding-bottom]+li[id$=-padding-left],
 li[id$=-padding-label-only]+li[id$=-padding-top]+li[id$=-padding-bottom]+li[id$=-padding-left]+li[id$=-padding-right],
+
 li[id$=-margin-label-only]+li[id$=-margin-top],
 li[id$=-margin-label-only]+li[id$=-margin-top]+li[id$=-margin-bottom],
 li[id$=-margin-label-only]+li[id$=-margin-top]+li[id$=-margin-bottom]+li[id$=-margin-left],

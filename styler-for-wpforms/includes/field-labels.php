@@ -1,5 +1,9 @@
 <?php
-// form fields section
+/**
+ * Controls to design the field labels of form in Customizer.
+ */
+
+// Form fields section.
 $wp_customize->add_section(
 	'sfwf_form_id_field_labels',
 	array(
@@ -28,7 +32,7 @@ $wp_customize->add_control(
 );
 
 
-// font style buttons
+// font style buttons.
 $wp_customize->add_setting(
 	'sfwf_form_id_' . $current_form_id . '[field-labels][font-style]',
 	array(
@@ -51,7 +55,7 @@ $wp_customize->add_control(
 	)
 );
 
-// Font size label
+// Font size label.
 $wp_customize->add_control(
 	new Sfwf_Label_Only(
 		$wp_customize, // WP_Customize_Manager.
@@ -81,7 +85,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -106,7 +110,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -133,7 +137,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -143,7 +147,7 @@ $wp_customize->add_control(
 
 /*
 Start of Section
-  */
+ */
 // Line height label.
 $wp_customize->add_control(
 	new Sfwf_Label_Only(
@@ -174,7 +178,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -199,7 +203,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -226,7 +230,7 @@ $wp_customize->add_control(
 			'type'        => 'text',
 			'priority'    => 10, // Within the section.
 			'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-			'label'       => __( '' ),
+			'label'       => '',
 			'input_attrs' => array(
 				'placeholder' => 'Ex.40px',
 			),
@@ -255,24 +259,16 @@ $wp_customize->add_control(
 	)
 );
 
-$wp_customize->add_setting(
-	'sfwf_form_id_' . $current_form_id . '[field-labels][padding]',
-	array(
-		'default'   => '',
-		'transport' => 'postMessage',
-		'type'      => 'option',
+$wp_customize->add_control(
+	new WP_Customize_Label_Only(
+		$wp_customize, // WP_Customize_Manager.
+		'sfwf_form_id_' . $current_form_id . '[field-labels][padding-label-only]', // Setting id.
+		array( // Args, including any custom ones.
+			'label'    => __( 'Padding' ),
+			'section'  => 'sfwf_form_id_field_labels',
+			'settings' => array(),
+		)
 	)
 );
 
-$wp_customize->add_control(
-	'sfwf_form_id_' . $current_form_id . '[field-labels][padding]',
-	array(
-		'type'        => 'text',
-		'priority'    => 10, // Within the section.
-		'section'     => 'sfwf_form_id_field_labels', // Required, core or custom.
-		'label'       => __( 'Padding' ),
-		'input_attrs' => array(
-			'placeholder' => 'Example: 5px 10px 5px 10px',
-		),
-	)
-);
+sfwf_margin_padding_controls( $wp_customize, $current_form_id, 'sfwf_form_id_field_labels', 'field-labels', 'padding' );
