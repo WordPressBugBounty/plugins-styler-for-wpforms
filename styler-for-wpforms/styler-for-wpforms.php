@@ -3,7 +3,7 @@
 Plugin Name: Styler for WPForms
 Plugin URI:  http://wpmonks.com/styler-wpforms
 Description: Create beautiful styles for your WPForms
-Version:     3.2
+Version:     3.3
 Author:      Sushil Kumar
 Author URI:  http://wpmonks.com/
 License:     GPL2License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -32,7 +32,7 @@ use WPForms\Frontend\CSSVars;
  */
 class Sk_Sfwf_Main_Class {
 
-	const VERSION = '3.2';
+	const VERSION = '3.3';
 	const SLUG    = 'styler-wpforms';
 	const NAME    = 'Styler for WPForms';
 	const AUTHOR  = 'Sushil Kumar';
@@ -291,9 +291,18 @@ class Sk_Sfwf_Main_Class {
 	 */
 	public function show_ultimate_addon_admin_page() {
 
-		$css_vars = new CSSVars();
-		$css_vars->init();
-		$css_vars->output_root( true );
+		if ( class_exists( 'WPForms\Frontend\CSSVars' ) ) {
+			$css_vars = new CSSVars();
+			$css_vars->init();
+			$css_vars->output_root( true );
+		} elseif ( class_exists( 'WPForms_Frontend' ) ) {
+			$wpforms_frontend = new WPForms_Frontend();
+			// Check if the method exists and is callable.
+			if ( method_exists( $wpforms_frontend, 'assets_css' ) && is_callable( array( $wpforms_frontend, 'assets_css' ) ) ) {
+				$wpforms_frontend->assets_css();
+			}
+		}
+
 		echo '<div id="sfwf-wpform-ulitimate-addon"></div>';
 	}
 
@@ -480,7 +489,6 @@ class Sk_Sfwf_Main_Class {
 
 		wp_enqueue_style( 'sfwf-admin-styles', SFWF_URL . '/build/index.css', array( 'wp-components' ), $asset_file['version'] );
 
-		$addons_info = $this->get_ultimate_admin_js_addons_info();
 		wp_enqueue_media();
 
 		wp_enqueue_script( 'sfwf-admin-wpforms-ultimate-js', SFWF_URL . '/build/index.js', $asset_file['dependencies'], $asset_file['version'], true );
@@ -542,7 +550,7 @@ class Sk_Sfwf_Main_Class {
 			'fieldIcons' => 'sfwf-field-icons/sfwf-field-icons.php',
 			'bootstrap'  => 'sfwf-bootstrap/sfwf-bootstrap.php',
 			'ai'         => 'ai-for-wpforms/ai-for-wpforms.php',
-			'blacklist'  => 'bfwpf-blacklist/bfwpf-blacklist.php',
+			'blacklist'  => 'sfwf-blacklist/sfwf-blacklist.php',
 		);
 
 		foreach ( $addon_slugs as $name => $slug ) {
@@ -579,7 +587,7 @@ class Sk_Sfwf_Main_Class {
 						break;
 					case 'blacklist':
 						$status['blacklist']  = 'active';
-						$version['blacklist'] = defined( 'BFWPF_BLACKLIST_VERSION' ) ? BFWPF_BLACKLIST_VERSION : '1.0';
+						$version['blacklist'] = defined( 'SFWF_BLACKLIST_VERSION' ) ? SFWF_BLACKLIST_VERSION : '1.0';
 						$addon_dependecies[]  = 'sfwf-admin-blacklist';
 						break;
 				}

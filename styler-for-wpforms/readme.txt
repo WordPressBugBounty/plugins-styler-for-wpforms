@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
 Tested up to: 6.7
-Stable tag: 3.2
+Stable tag: 3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,14 +12,14 @@ Ultimate Addons for WPForms makes the task of designing WPForms an easy one.
 
 == Description ==
 
-**Ultimate Addons for WPForms lets you create beautiful designs for WPForms.** It uses WordPress Customizer so you get a true WYSIWYG experience. All the changes you make in this plugin are instantaneously visible so you can see how the form looks in realtime.
+**Ultimate Addons for WPForms lets you create beautiful designs for WPForms.** It gives you an intutive interface with design controls and form preview. It has been tested to work with Divi, Elmentor, Visual composer, Thrive Architect Beaver Builder, Astra, GeneratePress, Oxygen Builder, Avada theme, OceanWP theme, Genesis Framework, The7, Salient and more. 
 
 **Here is step by step guide to style your forms**
 
 [youtube https://www.youtube.com/watch?v=JiWDrTt82DM]
 
 
-**It comes with 100+ options** to customize various parts of WPForms like form wrapper,form header, submit button, radio inputs, checkbox inputs, paragraph textarea, labels, section breaks, descriptions, text inputs and more. 
+**It comes with 150+ options** to customize various parts of WPForms like form wrapper,form header, submit button, radio inputs, checkbox inputs, paragraph textarea, labels, section breaks, descriptions, text inputs, confirmation message, error message and more. You can easily design a multipage form with this.
 
 
 You get to set the options like background color, font-size, font family, borders, width, text alignment, margin, padding and more for all the sections. You are no longer required to add custom CSS codes in your theme files to design forms. The designs created with this plugin will work even if you change your theme. 
@@ -70,6 +70,11 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.3 (20/11/2024) =
+* Added support for old versions of WPForms
+* Added support for blacklist addon
+
+
 = 3.2 (20/11/2024) =
 * Minor bugfix
 

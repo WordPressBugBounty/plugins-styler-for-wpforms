@@ -172,14 +172,14 @@ class Sfwf_Wpforms_Styler_Fetch {
 			);
 		}
 
-		$ultimate_settings = isset( $_POST['ultimateSettings'] ) ? sanitize_text_field( wp_unslash( $_POST['ultimateSettings'] ) ) : '';
-
+		$ultimate_settings = isset( $_POST['ultimateSettings'] ) ? sanitize_textarea_field( wp_unslash( $_POST['ultimateSettings'] ) ) : '';
 		if ( empty( $ultimate_settings ) ) {
 			wp_send_json_error( 'Ultimate Settings are empty' );
 		}
-		$ultimate_settings = stripslashes( $ultimate_settings );
+
 		$ultimate_settings = json_decode( $ultimate_settings, true );
-		$has_saved         = update_option( 'sfwf_ultimate_settings', $ultimate_settings );
+
+		$has_saved = update_option( 'sfwf_ultimate_settings', $ultimate_settings );
 		if ( ! $has_saved ) {
 			wp_send_json_error(
 				array(
@@ -188,6 +188,8 @@ class Sfwf_Wpforms_Styler_Fetch {
 				)
 			);
 		}
+
+		$ultimate_settings = $this->sfwf_ultimate_settings();
 		wp_send_json_success( $ultimate_settings );
 	}
 
@@ -385,7 +387,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 		$sfwf_license      = empty( $sfwf_license ) ? array() : $sfwf_license;
 		$ultimate_settings = empty( $ultimate_settings ) ? array() : $ultimate_settings;
 
-		$license_status_keys = array( 'bootstrap_addon_license_status', 'sfwf_tooltips_addon_license_status', 'field_icons_addon_license_status' );
+		$license_status_keys = array( 'bootstrap_addon_license_status', 'sfwf_tooltips_addon_license_status', 'field_icons_addon_license_status', 'blacklist_addon_license_status' );
 		$license_status      = array();
 
 		foreach ( $license_status_keys as $license_status_key ) {
