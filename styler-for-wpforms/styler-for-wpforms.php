@@ -3,7 +3,7 @@
 Plugin Name: Styler for WPForms
 Plugin URI:  http://wpmonks.com/styler-wpforms
 Description: Create beautiful styles for your WPForms
-Version:     3.3
+Version:     3.4
 Author:      Sushil Kumar
 Author URI:  http://wpmonks.com/
 License:     GPL2License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,6 +20,7 @@ define( 'SFWF_STORE_URL', 'https://wpmonks.com' );
 if ( ! class_exists( 'Sfwf_EDD_SL_Plugin_Updater' ) ) {
 	include_once SFWF_DIR . '/admin-menu/sfwf-edd-sl-plugin-updater.php';
 }
+
 require_once 'helpers/utils/class-sfwf-review.php';
 require_once SFWF_DIR . '/admin-menu/class-sfwf-license-page.php';
 require_once SFWF_DIR . '/admin-menu/class-sfwf-welcome-page.php';
@@ -32,7 +33,7 @@ use WPForms\Frontend\CSSVars;
  */
 class Sk_Sfwf_Main_Class {
 
-	const VERSION = '3.3';
+	const VERSION = '3.4';
 	const SLUG    = 'styler-wpforms';
 	const NAME    = 'Styler for WPForms';
 	const AUTHOR  = 'Sushil Kumar';
@@ -303,7 +304,17 @@ class Sk_Sfwf_Main_Class {
 			}
 		}
 
+		$form_id = isset( $_GET['formId'] ) ? sanitize_text_field( wp_unslash( $_GET['formId'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
 		echo '<div id="sfwf-wpform-ulitimate-addon"></div>';
+
+		$form_content = array();
+		if ( ! empty( $form_id ) ) {
+			$form_content = wpforms()->form->get( $form_id, array( 'content_only' => true ) );
+		}
+
+		$forms = array( $form_content );
+		do_action( 'sfwf_ultimate_addon_page_footer', $forms );
 	}
 
 	/**
@@ -551,6 +562,7 @@ class Sk_Sfwf_Main_Class {
 			'bootstrap'  => 'sfwf-bootstrap/sfwf-bootstrap.php',
 			'ai'         => 'ai-for-wpforms/ai-for-wpforms.php',
 			'blacklist'  => 'sfwf-blacklist/sfwf-blacklist.php',
+			'powerUps'   => 'sfwf-power-ups/sfwf-power-ups.php',
 		);
 
 		foreach ( $addon_slugs as $name => $slug ) {
@@ -580,15 +592,23 @@ class Sk_Sfwf_Main_Class {
 							$addon_dependecies[] = 'sfwf-admin-field-icons';
 						}
 						break;
+
 					case 'ai':
 						$status['ai']        = 'active';
 						$version['ai']       = defined( 'UAFWF_AI_FOR_WPFORMS_VERSION' ) ? UAFWF_AI_FOR_WPFORMS_VERSION : '1.0';
 						$addon_dependecies[] = 'sfwf-admin-ai';
 						break;
+
 					case 'blacklist':
 						$status['blacklist']  = 'active';
 						$version['blacklist'] = defined( 'SFWF_BLACKLIST_VERSION' ) ? SFWF_BLACKLIST_VERSION : '1.0';
 						$addon_dependecies[]  = 'sfwf-admin-blacklist';
+						break;
+
+					case 'powerUps':
+						$status['powerUps']  = 'active';
+						$version['powerUps'] = defined( 'SFWF_POWER_UPS_VERSION' ) ? SFWF_POWER_UPS_VERSION : '1.0';
+						$addon_dependecies[] = 'sfwf-admin-power-ups';
 						break;
 				}
 			} else {
@@ -1020,7 +1040,7 @@ class Sk_Sfwf_Main_Class {
 			$text = sprintf(
 				wp_kses(
 				/* translators: $1$s - WPForms plugin name; $2$s - WP.org review link; $3$s - WP.org review link. */
-					__( 'Please rate %1$s <a href="%2$s" target="_blank" rel="noopener noreferrer">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%3$s" target="_blank" rel="noopener">WordPress.org</a> to help us spread the word. Thank you from the Styler for WPForms team!', 'sk_sfwf' ),
+					__( 'Please rate %1$s <a href="%2$s" target="_blank" rel="noopener noreferrer">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%3$s" target="_blank" rel="noopener">WordPress.org</a> to help us spread the word. Thank you from the Utimate Addons for WPForms team!', 'sk_sfwf' ),
 					array(
 						'a' => array(
 							'href'   => array(),
@@ -1029,7 +1049,7 @@ class Sk_Sfwf_Main_Class {
 						),
 					)
 				),
-				'<strong>Styler for WPForms</strong>',
+				'<strong>Utimate Addons for WPForms</strong>',
 				$url,
 				$url
 			);

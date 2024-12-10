@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
 Tested up to: 6.7
-Stable tag: 3.3
+Stable tag: 3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.4 (10/12/2024) =
+* Added support Powerup addons
+
 = 3.3 (20/11/2024) =
 * Added support for old versions of WPForms
 * Added support for blacklist addon
