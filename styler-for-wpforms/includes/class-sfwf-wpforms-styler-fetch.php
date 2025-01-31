@@ -17,6 +17,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 	public function __construct() {
 
 		add_action( 'wp_ajax_sfwf_get_all_form_names', array( $this, 'sfwf_get_all_form_names' ) );
+		add_action( 'wp_ajax_sfwf_get_styler_data', array( $this, 'sfwf_get_styler_data' ) );
 		add_action( 'wp_ajax_sfwf_get_global_data', array( $this, 'sfwf_get_global_data' ) );
 
 		add_action( 'wp_ajax_sfwf_wpforms_form_html', array( $this, 'sfwf_wpforms_form_html' ) );
@@ -194,13 +195,37 @@ class Sfwf_Wpforms_Styler_Fetch {
 	}
 
 
+	/**
+	 * Returns the global data for the plugin.
+	 *
+	 * This function verifies the nonce and then retrieves the ultimate settings for the plugin.
+	 * The ultimate settings are then returned as part of the response.
+	 *
+	 * @return void
+	 */
+	public function sfwf_get_global_data() {
+
+		// Verify nonce.
+		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+		if ( ! $nonce || ! wp_verify_nonce( $nonce, 'sfwf_wpforms_ultimate_nonce' ) ) {
+			wp_send_json_error( 'Invalid nonce' );
+		}
+
+		$ultimate_settings = $this->sfwf_ultimate_settings();
+
+		$settings = array(
+			'ultimateSettings' => $ultimate_settings,
+		);
+
+		wp_send_json_success( $settings );
+	}
 
 	/**
 	 * Returns the styler settings
 	 *
 	 * @return void
 	 */
-	public function sfwf_get_global_data() {
+	public function sfwf_get_styler_data() {
 
 		// Verify nonce.
 		$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
@@ -213,16 +238,14 @@ class Sfwf_Wpforms_Styler_Fetch {
 		// wp_send_json_error( 'Form id not selected' );
 		// }
 
-		$styler_settings   = $this->sfwf_styler_settings( $form_id );
-		$ultimate_settings = $this->sfwf_ultimate_settings();
-		$general_settings  = $this->sfwf_general_settings( $form_id );
-		$field_labels      = $this->sfwf_form_fields_labels( $form_id );
+		$styler_settings  = $this->sfwf_styler_settings( $form_id );
+		$general_settings = $this->sfwf_general_settings( $form_id );
+		$field_labels     = $this->sfwf_form_fields_labels( $form_id );
 
 		$settings = array(
-			'stylerSettings'   => $styler_settings,
-			'ultimateSettings' => $ultimate_settings,
-			'generalSettings'  => $general_settings,
-			'labels'           => $field_labels,
+			'stylerSettings'  => $styler_settings,
+			'generalSettings' => $general_settings,
+			'labels'          => $field_labels,
 		);
 
 		wp_send_json_success( $settings );
@@ -269,7 +292,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 				// for complex fiels need to create the settings of every subfield.
 				switch ( $field['type'] ) {
 					case 'address':
-						$sub_fields = array( 'Address Line 1', 'Address Line 2', 'City', 'Zip Code', 'Country' );
+						$sub_fields = array( 'Address Line 1', 'Address Line 2', 'City', 'State', 'Zip Code', 'Country' );
 						break;
 					case 'email':
 						$sub_fields = ! empty( $field['confirmation'] ) ? array( 'Email', 'Confirm Email' ) : array();
@@ -283,9 +306,13 @@ class Sfwf_Wpforms_Styler_Fetch {
 						$sub_fields = ! empty( $field['confirmation'] ) ? array( 'Password', 'Confirm Password' ) : array();
 						break;
 					case 'name':
-						$sub_fields = array( 'First name', 'Last name' );
 						if ( isset( $field['format'] ) && 'first-middle-last' === $field['format'] ) {
 							$sub_fields = array( 'First Name', 'Middle Name', 'Last Name' );
+						} elseif ( isset( $field['format'] ) && 'first-last' === $field['format'] ) {
+							$sub_fields = array( 'First Name', 'Last Name' );
+						} else {
+							// Incase the name field format is set to simple.
+							$sub_fields = array();
 						}
 						break;
 
@@ -310,11 +337,12 @@ class Sfwf_Wpforms_Styler_Fetch {
 							break;
 
 						case 'Country':
-							if ( ! empty( $field['country_hide'] ) || ( 'international' !== isset( $field['scheme'] ) && $field['scheme'] ) ) {
+							if ( ! empty( $field['country_hide'] ) || ( isset( $field['scheme'] ) && 'us' === $field['scheme'] ) ) {
 								$sub_field_visible = false;
 							}
 							break;
 					}
+
 					// push sub-fields of complex fields.
 					if ( $sub_field_visible ) {
 						$id_value = str_replace( ' ', '_', $sub_field );
@@ -383,11 +411,12 @@ class Sfwf_Wpforms_Styler_Fetch {
 	public function sfwf_ultimate_settings() {
 
 		$ultimate_settings = get_option( 'sfwf_ultimate_settings' );
+
 		$sfwf_license      = get_option( 'sfwf_licenses' );
 		$sfwf_license      = empty( $sfwf_license ) ? array() : $sfwf_license;
 		$ultimate_settings = empty( $ultimate_settings ) ? array() : $ultimate_settings;
 
-		$license_status_keys = array( 'bootstrap_addon_license_status', 'sfwf_tooltips_addon_license_status', 'field_icons_addon_license_status', 'blacklist_addon_license_status' );
+		$license_status_keys = array( 'bootstrap_addon_license_status', 'sfwf_tooltips_addon_license_status', 'field_icons_addon_license_status', 'blacklist_addon_license_status', 'power_ups_addon_license_status' );
 		$license_status      = array();
 
 		foreach ( $license_status_keys as $license_status_key ) {
@@ -398,6 +427,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 			'licenses' => array(
 				'keys'   => $sfwf_license,
 				'status' => $license_status,
+				'notice' => array(),
 			),
 		);
 
@@ -430,7 +460,8 @@ class Sfwf_Wpforms_Styler_Fetch {
 		$general_settings = isset( $_POST['generalSettings'] ) ? sanitize_text_field( wp_unslash( $_POST['generalSettings'] ) ) : '';
 		$general_settings = json_decode( $general_settings, true );
 
-		$has_styler_settings_saved  = update_option( 'sfwf_form_id_' . $form_id, $styler_settings );
+		$has_styler_settings_saved = update_option( 'sfwf_form_id_' . $form_id, $styler_settings );
+
 		$has_general_settings_saved = update_option( 'sfwf_general_settings' . $form_id, $general_settings );
 
 		if ( ! $has_styler_settings_saved && ! $has_general_settings_saved ) {

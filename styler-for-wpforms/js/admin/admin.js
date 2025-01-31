@@ -1,53 +1,63 @@
 (function ($) {
   $(document).ready(function () {
-    // Function to get URL parameter by name
-    function getUrlParameter(name) {
-      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-      var results = regex.exec(window.location.search);
-      return results === null
-        ? ""
-        : decodeURIComponent(results[1].replace(/\+/g, " "));
+
+
+    function addpendStylerButton() {
+
+      // Get the formId from localized data.
+      var formId = window.sfwfPowerUpsFormBuilderData.formId;
+
+      // Get the builder url.
+      var builderUrl = window.sfwfPowerUpsFormBuilderData.ultimatePageUrl + "&formId=" + formId;
+
+      // Create the new button element with the specified class and data attribute
+      var stylerBtn = $("<a>", {
+        class: "wpforms-panel-styler-button sfwf-custom-btn",
+        "data-panel": "styler",
+        href: builderUrl,
+      });
+
+      // Create the <i> element with the specified class
+      var icon = $("<i>", {
+        class: "fa fa-paint-brush",
+      });
+
+      // Create the <span> element with the text "Styler"
+      var span = $("<span>").text("Styler");
+
+      // Append the <i> and <span> elements to the new button
+      stylerBtn.append(icon).append(span);
+
+      // Append the new button after the existing button with the specified class
+      $(".wpforms-panel-providers-button").last().after(stylerBtn);
+
+      return stylerBtn;
+
     }
 
-    // Get the formId from the URL parameter 'form_id'
-    var formId = getUrlParameter("form_id");
+    // Call the function to add the new button
+    addpendStylerButton();
 
-    // Create the new button element with the specified class and data attribute
-    var newButton = $("<a>", {
-      class: "wpforms-panel-styler-button sfwf-custom-btn",
-      "data-panel": "styler",
-    });
+    function addAddressFieldSchemeLink() {
+      // Get the power ups link from the localized data
+      const articlesUrls = window.sfwfPowerUpsFormBuilderData.articlesUrls;
+      const addressFieldSchemeLink = articlesUrls.power_ups.address_scheme;
 
-    // Create the <i> element with the specified class
-    var icon = $("<i>", {
-      class: "fa fa-paint-brush",
-    });
+      // Create the <a> tag
+      const linkElement = $('<a>', {
+        href: addressFieldSchemeLink,
+        target: '_blank',
+        text: 'Add New Address Field Schemes',
+        class: 'after-label-description sfwf-address-field-scheme-link',
+      });
 
-    // Create the <span> element with the text "Styler"
-    var span = $("<span>").text("Styler");
+      // Find the target div and append the link under the label
+      $('.wpforms-field-option-row-scheme > label').append(linkElement);
+    }
 
-    // Append the <i> and <span> elements to the new button
-    newButton.append(icon).append(span);
+    // call the function to add power ups link in address field scheme
+    addAddressFieldSchemeLink();
 
-    // Append the new button after the existing button with the specified class
-    $(".wpforms-panel-providers-button").last().after(newButton);
 
-    // Add click event handler to the new button for redirection
-    newButton.on("click", function (event) {
-      // Prevent default behavior
-      event.preventDefault();
-
-      // Get the current website URL
-      var baseUrl = window.location.origin;
-      // Set the fixed part of the URL and form ID variable
-      var fixedPart = "/wp-admin/admin.php?page=sfwf_wpforms_ultimate&formId=";
-
-      // Construct the full URL
-      var fullUrl = baseUrl + fixedPart + formId;
-
-      // Redirect to the constructed URL
-      window.location.href = fullUrl;
-    });
   });
 })(jQuery);

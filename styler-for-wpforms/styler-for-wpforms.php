@@ -3,7 +3,7 @@
 Plugin Name: Styler for WPForms
 Plugin URI:  http://wpmonks.com/styler-wpforms
 Description: Create beautiful styles for your WPForms
-Version:     3.4
+Version:     3.5
 Author:      Sushil Kumar
 Author URI:  http://wpmonks.com/
 License:     GPL2License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -33,7 +33,7 @@ use WPForms\Frontend\CSSVars;
  */
 class Sk_Sfwf_Main_Class {
 
-	const VERSION = '3.4';
+	const VERSION = '3.5';
 	const SLUG    = 'styler-wpforms';
 	const NAME    = 'Styler for WPForms';
 	const AUTHOR  = 'Sushil Kumar';
@@ -484,11 +484,25 @@ class Sk_Sfwf_Main_Class {
 
 		wp_enqueue_style( 'sfwf_welcome_page_css', self::$url . '/css/admin.css', array(), self::VERSION );
 
+		// include articles urls.
+		include 'helpers/utils/article-urls.php';
 		if ( is_admin() || defined( 'REST_REQUEST' ) || function_exists( 'wpforms' ) || class_exists( 'wpforms' ) ) {
 
 			// for wpforms page.
 			if ( isset( $_GET['page'] ) && 'wpforms-builder' === $_GET['page'] ) {
 				wp_enqueue_script( 'sfwf-admin-wpforms-backend-editor-js', SFWF_URL . '/js/admin/admin.js', array( 'jquery' ), self::VERSION, true );
+
+				$form_id = isset( $_GET['form_id'] ) ? intval( $_GET['form_id'] ) : '';
+				wp_localize_script(
+					'sfwf-admin-wpforms-backend-editor-js',
+					'sfwfPowerUpsFormBuilderData',
+					array(
+						'adminUrl'        => get_admin_url(),
+						'ultimatePageUrl' => admin_url( 'admin.php?page=sfwf_wpforms_ultimate' ),
+						'formId'          => $form_id,
+						'articlesUrls'    => $articles_urls,
+					)
+				);
 			}
 
 			if ( ( ! isset( $_GET['page'] ) || 'sfwf_wpforms_ultimate' !== $_GET['page'] ) ) {
@@ -541,6 +555,9 @@ class Sk_Sfwf_Main_Class {
 				'adminUrl'      => get_admin_url(),
 			)
 		);
+
+		// enqueue scripts from addons.
+		do_action( 'sfwf_ultimate_enqueue_admin_scripts', $articles_urls );
 	}
 
 	/**
@@ -692,6 +709,7 @@ class Sk_Sfwf_Main_Class {
 			'justify' => 'Justify',
 			'right'   => 'Right',
 		);
+
 		include 'helpers/utils/fonts.php';
 		$wp_customize->add_panel(
 			'sfwf_panel',

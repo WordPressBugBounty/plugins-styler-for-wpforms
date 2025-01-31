@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
 Tested up to: 6.7
-Stable tag: 3.4
+Stable tag: 3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Ultimate Addons for WPForms makes the task of designing WPForms an easy one.
 
 == Description ==
 
-**Ultimate Addons for WPForms lets you create beautiful designs for WPForms.** It gives you an intutive interface with design controls and form preview. It has been tested to work with Divi, Elmentor, Visual composer, Thrive Architect Beaver Builder, Astra, GeneratePress, Oxygen Builder, Avada theme, OceanWP theme, Genesis Framework, The7, Salient and more. 
+**Ultimate addons for WPForms has built in free styler addon that lets you create beautiful designs for WPForms.** It gives you an intutive interface with design controls and form preview. It has been tested to work with Divi, Elmentor, Visual composer, Thrive Architect Beaver Builder, Astra, GeneratePress, Oxygen Builder, Avada theme, OceanWP theme, Genesis Framework, The7, Salient and more. 
 
 **Here is step by step guide to style your forms**
 
@@ -39,9 +39,13 @@ PREMIUM ADDONS TO EXTEND THE FUNCTIONALITY
 * [ **Field Icons for WPForms** ](https://wpmonks.com/downloads/tooltips-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
 **Field Icons for WPForms lets you add Fontawesome Icons ( 500+ ) inside inputs and textarea fields**. There are plenty of design options to change position, color, alignmnet and size of icons.
 
+* [ **Advanced Blacklist for WPForms** ](https://wpmonks.com/downloads/blacklist-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
+**Blacklist for WPForms lets you prevent spam form submissions**. There are options to block submissions by email ids, email domains and certain words.
+
+* [ **Powerups for WPForms** ](https://wpmonks.com/downloads/power-ups-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
+**Powerups for WPForms is collection small yet useful features for WPForms**. There are options to make fields as readonly, disable empty fields in submission preview, set password strength and more.
 
 == Installation ==
-
 
 1. Upload the plugin files to the `/wp-content/plugins/styler-for-wpforms` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
@@ -70,6 +74,9 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.5 (31/1/2025) =
+* Fixed support for powerup addons
+
 = 3.4 (10/12/2024) =
 * Added support Powerup addons
 
