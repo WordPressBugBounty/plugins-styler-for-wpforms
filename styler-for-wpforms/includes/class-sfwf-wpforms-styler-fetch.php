@@ -1,8 +1,10 @@
 <?php
+
 /**
  * Performing Ajax actions from new ulimate addon dashboard.
  */
 class Sfwf_Wpforms_Styler_Fetch {
+
 
 	/**
 	 * Instance of class.
@@ -147,7 +149,6 @@ class Sfwf_Wpforms_Styler_Fetch {
 						'label' => $form->post_title,
 						'value' => $form->ID,
 					);
-
 				}
 			}
 		}
@@ -156,7 +157,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 	}
 
 	/**
-	 * Save ultimate addon settings.
+	 * Save Ultimate Kit settings.
 	 *
 	 * @return void
 	 */
@@ -353,9 +354,15 @@ class Sfwf_Wpforms_Styler_Fetch {
 				}
 			}
 
+			$field_label = isset( $field['label'] ) ? $field['label'] : '';
+			// for page break.
+			if ( 'pagebreak' === $field['type'] ) {
+				$field_label = ! empty( $field['title'] ) ? $field['title'] : 'pagebreak (' . $field['id'] . ')';
+			}
+
 			$field_labels[] = array(
 				'id'      => $field['id'],
-				'label'   => isset( $field['label'] ) ? $field['label'] : '',
+				'label'   => $field_label,
 				'type'    => $field['type'],
 				'choices' => $choices,
 			);
@@ -404,7 +411,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 
 
 	/**
-	 * Returns the styler ultimate addon settings
+	 * Returns the styler Ultimate Kit settings
 	 *
 	 * @return array
 	 */

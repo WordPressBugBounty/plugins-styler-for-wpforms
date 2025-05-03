@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Styler for WPForms
+Plugin Name: Ultimate Kit ( Styler ) for WPForms
 Plugin URI:  http://wpmonks.com/styler-wpforms
 Description: Create beautiful styles for your WPForms
-Version:     3.5
+Version:     3.6
 Author:      Sushil Kumar
 Author URI:  http://wpmonks.com/
 License:     GPL2License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,13 +27,16 @@ require_once SFWF_DIR . '/admin-menu/class-sfwf-welcome-page.php';
 require_once SFWF_DIR . '/admin-menu/class-sfwf-addons-page.php';
 require_once SFWF_DIR . '/includes/class-sfwf-wpforms-styler-fetch.php';
 require_once 'helpers/utils/responsive.php';
+
 use WPForms\Frontend\CSSVars;
+
 /**
  * Main class responsible for loading the plugin
  */
 class Sk_Sfwf_Main_Class {
 
-	const VERSION = '3.5';
+
+	const VERSION = '3.6';
 	const SLUG    = 'styler-wpforms';
 	const NAME    = 'Styler for WPForms';
 	const AUTHOR  = 'Sushil Kumar';
@@ -268,7 +271,7 @@ class Sk_Sfwf_Main_Class {
 	}
 
 	/**
-	 * Register ultimate addon under wpforms
+	 * Register Ultimate Kit under wpforms
 	 *
 	 * @return void
 	 */
@@ -277,20 +280,20 @@ class Sk_Sfwf_Main_Class {
 		// Payments sub menu item.
 		add_submenu_page(
 			'wpforms-overview',
-			esc_html__( 'Ultimate Addons', 'wpforms-lite' ),
-			esc_html__( 'Ultimate Addons', 'wpforms-lite' ),
+			esc_html__( 'Ultimate Kit', 'wpforms-lite' ),
+			esc_html__( 'Ultimate Kit', 'wpforms-lite' ),
 			'manage_options',
 			'sfwf_wpforms_ultimate',
-			array( $this, 'show_ultimate_addon_admin_page' )
+			array( $this, 'show_ultimate_kit_admin_page' )
 		);
 	}
 
 	/**
-	 * Backend ultimate addons interface root.
+	 * Backend Ultimate Kit interface root.
 	 *
 	 * @return void
 	 */
-	public function show_ultimate_addon_admin_page() {
+	public function show_ultimate_kit_admin_page() {
 
 		if ( class_exists( 'WPForms\Frontend\CSSVars' ) ) {
 			$css_vars = new CSSVars();
@@ -315,6 +318,7 @@ class Sk_Sfwf_Main_Class {
 
 		$forms = array( $form_content );
 		do_action( 'sfwf_ultimate_addon_page_footer', $forms );
+		do_action( 'sfwf_ultimate_kit_page_footer', $forms );
 	}
 
 	/**
@@ -1057,7 +1061,7 @@ class Sk_Sfwf_Main_Class {
 			$url  = 'https://wordpress.org/support/plugin/styler-for-wpforms/reviews/?filter=5#new-post';
 			$text = sprintf(
 				wp_kses(
-				/* translators: $1$s - WPForms plugin name; $2$s - WP.org review link; $3$s - WP.org review link. */
+					/* translators: $1$s - WPForms plugin name; $2$s - WP.org review link; $3$s - WP.org review link. */
 					__( 'Please rate %1$s <a href="%2$s" target="_blank" rel="noopener noreferrer">&#9733;&#9733;&#9733;&#9733;&#9733;</a> on <a href="%3$s" target="_blank" rel="noopener">WordPress.org</a> to help us spread the word. Thank you from the Utimate Addons for WPForms team!', 'sk_sfwf' ),
 					array(
 						'a' => array(

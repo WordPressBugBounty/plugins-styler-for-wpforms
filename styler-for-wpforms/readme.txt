@@ -1,22 +1,22 @@
-=== Utimate Addons ( Styler ) for WPForms ===
+=== Utimate Kit ( Styler ) for WPForms ===
 Contributors: wpmonks
 Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
-Tested up to: 6.7
-Stable tag: 3.5
+Tested up to: 6.8
+Stable tag: 3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Ultimate Addons for WPForms makes the task of designing WPForms an easy one.
+Ultimate Kit for WPForms makes the task of designing WPForms an easy one.
 
 == Description ==
 
-**Ultimate addons for WPForms has built in free styler addon that lets you create beautiful designs for WPForms.** It gives you an intutive interface with design controls and form preview. It has been tested to work with Divi, Elmentor, Visual composer, Thrive Architect Beaver Builder, Astra, GeneratePress, Oxygen Builder, Avada theme, OceanWP theme, Genesis Framework, The7, Salient and more. 
+**Ultimate Kit for WPForms has built in free styler addon that lets you create beautiful designs for WPForms.** It gives you an intutive interface with design controls and form preview. It has been tested to work with Divi, Elmentor, Visual composer, Thrive Architect Beaver Builder, Astra, GeneratePress, Oxygen Builder, Avada theme, OceanWP theme, Genesis Framework, The7, Salient and more. 
 
 **Here is step by step guide to style your forms**
 
-[youtube https://www.youtube.com/watch?v=JiWDrTt82DM]
+[youtube https://www.youtube.com/watch?v=Y-mcQ3Ilsbg]
 
 
 **It comes with 150+ options** to customize various parts of WPForms like form wrapper,form header, submit button, radio inputs, checkbox inputs, paragraph textarea, labels, section breaks, descriptions, text inputs, confirmation message, error message and more. You can easily design a multipage form with this.
@@ -32,12 +32,18 @@ PREMIUM ADDONS TO EXTEND THE FUNCTIONALITY
 * [**Bootstrap for WPForms**](https://wpmonks.com/downloads/bootstrap-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
 **Bootstrap for WPForms Forms is an easy to use addon to add bootstrap design in one click** . This plugin the latest major release of Bootstrap ( i.e Bootstrap 4 ). The bootsrap design will be applied to all fields and you can also change its theme to compliment your theme color. 
 
+[youtube https://www.youtube.com/watch?v=16v_NGjcNg4]
+
 * [ **Tooltips for WPForms** ](https://wpmonks.com/downloads/tooltips-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org): 
 **Tooltips for WPForms addon give you the options to add tooltips in field labels with ease**. There are multiple colors, icons, animation effects, position options so, that they look the way you want them. 
+
+[youtube https://www.youtube.com/watch?v=zhHS2Nxu2UM]
 
 
 * [ **Field Icons for WPForms** ](https://wpmonks.com/downloads/tooltips-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
 **Field Icons for WPForms lets you add Fontawesome Icons ( 500+ ) inside inputs and textarea fields**. There are plenty of design options to change position, color, alignmnet and size of icons.
+
+[youtube https://www.youtube.com/watch?v=6BJokN2f524]
 
 * [ **Advanced Blacklist for WPForms** ](https://wpmonks.com/downloads/blacklist-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
 **Blacklist for WPForms lets you prevent spam form submissions**. There are options to block submissions by email ids, email domains and certain words.
@@ -74,6 +80,9 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.6 (03/05/2025) =
+* Updated plugin name to Ultimate Kit
+
 = 3.5 (31/1/2025) =
 * Fixed support for powerup addons
 
