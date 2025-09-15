@@ -280,8 +280,8 @@ class Sfwf_Wpforms_Styler_Fetch {
 
 			$choices = array();
 
+			// for fields which have choices.
 			if ( in_array( $field['type'], $choices_fields, true ) ) {
-
 				foreach ( $field['choices'] as $choice_index => $choice ) {
 					$choices[ $choice_index ] = $choice['label'];
 				}
@@ -355,17 +355,54 @@ class Sfwf_Wpforms_Styler_Fetch {
 			}
 
 			$field_label = isset( $field['label'] ) ? $field['label'] : '';
+
 			// for page break.
 			if ( 'pagebreak' === $field['type'] ) {
 				$field_label = ! empty( $field['title'] ) ? $field['title'] : 'pagebreak (' . $field['id'] . ')';
+			} elseif ( 'html' === $field['type'] ) {
+				$field_label = ! empty( $field['name'] ) ? $field['name'] : 'HTML (' . $field['id'] . ')';
 			}
 
-			$field_labels[] = array(
+			$field_data = array(
 				'id'      => $field['id'],
 				'label'   => $field_label,
 				'type'    => $field['type'],
 				'choices' => $choices,
 			);
+
+			// pass the date type for date field.
+			$date_type = '';
+			if ( 'date-time' === $field['type'] && ! empty( $field['date_type'] ) ) {
+				$date_type = $field['date_type'];
+			}
+			$field_data['date_type'] = $date_type;
+
+			// pass the position of pagebreaks.
+			$position = '';
+			if ( 'pagebreak' === $field['type'] ) {
+				$position = $field['position'];
+			}
+
+			$child_field_ids = array();
+			if ( 'layout' === $field['type'] && isset( $field['columns'] ) ) {
+
+				foreach ( $field['columns'] as $column ) {
+					if ( ! empty( $column['fields'] ) && is_array( $column['fields'] ) ) {
+						$child_field_ids = array_merge( $child_field_ids, $column['fields'] );
+					}
+				}
+			}
+
+			$field_data['position']        = $position;
+			$field_data['child_field_ids'] = $child_field_ids;
+			$field_data['description']     = ! empty( $field['description'] ) ? $field['description'] : '';
+			$field_data['size']            = ! empty( $field['size'] ) ? $field['size'] : 'medium';
+			$field_data['required']        = ! empty( $field['required'] ) ? $field['required'] : false;
+			$field_data['placeholder']     = ! empty( $field['placeholder'] ) ? $field['placeholder'] : '';
+			$field_data['css']             = ! empty( $field['css'] ) ? $field['css'] : '';
+			$field_data['label_hide']      = ! empty( $field['label_hide'] ) ? $field['label_hide'] : false;
+
+			$field_labels[] = $field_data;
 		}
 
 		return $field_labels;
@@ -423,7 +460,7 @@ class Sfwf_Wpforms_Styler_Fetch {
 		$sfwf_license      = empty( $sfwf_license ) ? array() : $sfwf_license;
 		$ultimate_settings = empty( $ultimate_settings ) ? array() : $ultimate_settings;
 
-		$license_status_keys = array( 'bootstrap_addon_license_status', 'sfwf_tooltips_addon_license_status', 'field_icons_addon_license_status', 'blacklist_addon_license_status', 'power_ups_addon_license_status' );
+		$license_status_keys = array( 'bootstrap_addon_license_status', 'sfwf_tooltips_addon_license_status', 'field_icons_addon_license_status', 'blacklist_addon_license_status', 'power_ups_addon_license_status', 'file_renamer_addon_license_status', 'bulk_actions_addon_license_status' );
 		$license_status      = array();
 
 		foreach ( $license_status_keys as $license_status_key ) {

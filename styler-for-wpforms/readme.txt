@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
 Tested up to: 6.8
-Stable tag: 3.6
+Stable tag: 3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,8 +45,15 @@ PREMIUM ADDONS TO EXTEND THE FUNCTIONALITY
 
 [youtube https://www.youtube.com/watch?v=6BJokN2f524]
 
-* [ **Advanced Blacklist for WPForms** ](https://wpmonks.com/downloads/blacklist-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
-**Blacklist for WPForms lets you prevent spam form submissions**. There are options to block submissions by email ids, email domains and certain words.
+* [ **Bulk Actions for WPForms** ](https://wpmonks.com/downloads/bulk-actions-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
+**It lets you perform bulk actions like duplicating multiple fields, deleting multiple fields, moving fields from one form to another and editing multiple fields**. This is your are all in one solution to quickly and efficently manage/update your complex forms.
+
+[youtube https://www.youtube.com/watch?v=-GeZHCbEUdY]
+
+* [ **File Renamer for WPForms** ](https://wpmonks.com/downloads/file-renamer-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
+**It lets you rename the uploaded files with ease**. There are options to create folders as well to better organize the uploaded fields.
+
+[youtube https://www.youtube.com/watch?v=sSHaT3yh1Pw]
 
 * [ **Powerups for WPForms** ](https://wpmonks.com/downloads/power-ups-for-wpforms/?utm_source=repo&utm_medium=plugin-page&utm_campaign=wordpress-org):
 **Powerups for WPForms is collection small yet useful features for WPForms**. There are options to make fields as readonly, disable empty fields in submission preview, set password strength and more.
@@ -80,6 +87,10 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.7 (15/09/2025) =
+* Added support for File Renamer license key
+* Added support for Bulk Actions for WPForms
+
 = 3.6 (03/05/2025) =
 * Updated plugin name to Ultimate Kit
 

@@ -3,7 +3,7 @@
 Plugin Name: Ultimate Kit ( Styler ) for WPForms
 Plugin URI:  http://wpmonks.com/styler-wpforms
 Description: Create beautiful styles for your WPForms
-Version:     3.6
+Version:     3.7
 Author:      Sushil Kumar
 Author URI:  http://wpmonks.com/
 License:     GPL2License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -36,7 +36,7 @@ use WPForms\Frontend\CSSVars;
 class Sk_Sfwf_Main_Class {
 
 
-	const VERSION = '3.6';
+	const VERSION = '3.7';
 	const SLUG    = 'styler-wpforms';
 	const NAME    = 'Styler for WPForms';
 	const AUTHOR  = 'Sushil Kumar';
@@ -520,8 +520,9 @@ class Sk_Sfwf_Main_Class {
 
 		wp_enqueue_media();
 
-		wp_enqueue_script( 'sfwf-admin-wpforms-ultimate-js', SFWF_URL . '/build/index.js', $asset_file['dependencies'], $asset_file['version'], true );
-		wp_enqueue_script( 'sfwf-admin-wpforms-ultimate', SFWF_URL . '/build/index.js', '', $asset_file['version'], true );
+		wp_enqueue_script( 'sfwf-admin-wpforms-ultimate', SFWF_URL . '/build/index.js', $asset_file['dependencies'], $asset_file['version'], true );
+
+		// wp_enqueue_script( 'sfwf-admin-wpforms-ultimate', SFWF_URL . '/build/index.js', '', $asset_file['version'], true );
 
 		// Generate a nonce.
 		$nonce = wp_create_nonce( 'sfwf_wpforms_ultimate_nonce' );
@@ -545,7 +546,7 @@ class Sk_Sfwf_Main_Class {
 		$addons_info    = $this->get_ultimate_admin_js_addons_info();
 
 		wp_localize_script(
-			'sfwf-admin-wpforms-ultimate-js',
+			'sfwf-admin-wpforms-ultimate',
 			'sfwfAdminWpformsUltimate',
 			array(
 				'nonce'         => $nonce,
@@ -578,12 +579,15 @@ class Sk_Sfwf_Main_Class {
 		$version           = array();
 
 		$addon_slugs = array(
-			'tooltips'   => 'sfwf-tooltips/sfwf-tooltips.php',
-			'fieldIcons' => 'sfwf-field-icons/sfwf-field-icons.php',
-			'bootstrap'  => 'sfwf-bootstrap/sfwf-bootstrap.php',
-			'ai'         => 'ai-for-wpforms/ai-for-wpforms.php',
-			'blacklist'  => 'sfwf-blacklist/sfwf-blacklist.php',
-			'powerUps'   => 'sfwf-power-ups/sfwf-power-ups.php',
+			'tooltips'    => 'sfwf-tooltips/sfwf-tooltips.php',
+			'fieldIcons'  => 'sfwf-field-icons/sfwf-field-icons.php',
+			'bootstrap'   => 'sfwf-bootstrap/sfwf-bootstrap.php',
+			'ai'          => 'ai-for-wpforms/ai-for-wpforms.php',
+			'blacklist'   => 'sfwf-blacklist/sfwf-blacklist.php',
+			'powerUps'    => 'sfwf-power-ups/sfwf-power-ups.php',
+			'fileRenamer' => 'sfwf-file-renamer/sfwf-file-renamer.php',
+			'bulkActions' => 'sfwf-bulk-actions/sfwf-bulk-actions.php',
+
 		);
 
 		foreach ( $addon_slugs as $name => $slug ) {
@@ -630,6 +634,17 @@ class Sk_Sfwf_Main_Class {
 						$status['powerUps']  = 'active';
 						$version['powerUps'] = defined( 'SFWF_POWER_UPS_VERSION' ) ? SFWF_POWER_UPS_VERSION : '1.0';
 						$addon_dependecies[] = 'sfwf-admin-power-ups';
+						break;
+
+					case 'fileRenamer':
+						$status['fileRenamer']  = 'active';
+						$version['fileRenamer'] = defined( 'SFWF_FILE_RENAMER_VERSION' ) ? SFWF_FILE_RENAMER_VERSION : '1.0';
+						$addon_dependecies[]    = 'sfwf-admin-file-renamer';
+						break;
+					case 'bulkActions':
+						$status['bulkActions']  = 'active';
+						$version['bulkActions'] = defined( 'SFWF_FILE_BULK_ACTIONS_VERSION' ) ? SFWF_BULK_ACTIONS_VERSION : '1.0';
+						$addon_dependecies[]    = 'sfwf-admin-bulk-actions';
 						break;
 				}
 			} else {
