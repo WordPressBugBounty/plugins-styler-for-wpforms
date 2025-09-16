@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/wpmonks
 Tags: WPForms designer, WPForms Styler, WPForms CSS, WPForms Templates, WPForms Themes
 Requires at least: 4.0
 Tested up to: 6.8
-Stable tag: 3.7
+Stable tag: 3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,9 @@ As of now you can only create one design for one form. If you want to create mul
 4. Options in settings
 
 == Changelog ==
+= 3.8 (16/09/2025) =
+* Fixed an issue with bulk actions for WPForms
+
 = 3.7 (15/09/2025) =
 * Added support for File Renamer license key
 * Added support for Bulk Actions for WPForms

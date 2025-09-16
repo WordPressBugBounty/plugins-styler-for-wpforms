@@ -3,7 +3,7 @@
 Plugin Name: Ultimate Kit ( Styler ) for WPForms
 Plugin URI:  http://wpmonks.com/styler-wpforms
 Description: Create beautiful styles for your WPForms
-Version:     3.7
+Version:     3.8
 Author:      Sushil Kumar
 Author URI:  http://wpmonks.com/
 License:     GPL2License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -36,7 +36,7 @@ use WPForms\Frontend\CSSVars;
 class Sk_Sfwf_Main_Class {
 
 
-	const VERSION = '3.7';
+	const VERSION = '3.8';
 	const SLUG    = 'styler-wpforms';
 	const NAME    = 'Styler for WPForms';
 	const AUTHOR  = 'Sushil Kumar';
